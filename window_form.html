@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en" >
+<head>
+  <meta charset="UTF-8">
+  <title>Standard_Form_Template</title>
+  
+  
+  <link rel='stylesheet prefetch' href='https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css'>
+
+  
+  
+</head>
+
+<body>
+  <div>
+     <h1>Window Work Order</h1>
+     <div class="row">
+          <!-- Left side column (Unused) -->
+          <div class="col-xs-2 col-sm-2 col-md-3 col-lg-3"></div>
+          <div class="col-xs-8 col-sm-8 col-md-6 col-lg-6">
+               <form>
+                    <div class="form-group">
+                         <label for="customer_name">Customer Name</label>
+                         <input class="form-control" type="text" id="customer_name">
+                         <label for="completed_by">Completed By</label>
+                         <input class="form-control" type="text" id="completed_by">
+                         <label for="job_number">Job Number</label>
+                         <input class="form-control" type="number" id="job_number">
+                    </div>
+                    <h3>Base Location</h3>
+                    <div class="form-group">
+                         <label for="location_code">Location</label>
+                         <select class="form-control" id="location_code">
+                         </select>
+                    </div>
+                    <h3>Opening Size</h3>
+                    <div class="form-group">
+                         <label for="">Width</label>
+                         <input class="form-control" type="number">
+                    </div>
+                    <div class="form-group">
+                         <label for="">Height</label>
+                         <input class="form-control" type="number">
+                    </div>
+                    <div class="form-group">
+                         <label for="">Total UI</label>
+                         <input class="form-control" type="number">
+                    </div>
+                    <div class="form-group">
+                         <label for="">Leg Height</label>
+                         <input class="form-control" type="number">
+                    </div>
+                    <h3>Window Type</h3>
+                    <div class="form-group">
+                         <label for="series_code">Series Code</label>
+                         <select class="form-control" id="series_code"></select>
+                    </div>
+                    <div class="form-group">
+                         <label for="style_code">Style Code</label>
+                         <select class="form-control" id="style_code"></select>
+                    </div>
+                    <h3>Color</h3>
+                    <div class="form-group">
+                         <label for="exterior_color">Exterior</label>
+                         <select class="form-control" id="exterior_color"></select>
+                    </div>
+                    <div class="form-group">
+                         <label for="interior_color">Interior</label>
+                         <select class="form-control" id="interior_color"></select>
+                    </div>
+                    <h3>Grid&#40;s&#41;</h3>
+                    <div class="form-group">
+                         <label for="grid_type">Type</label>
+                         <select class="form-control" id="grid_type"></select>
+                    </div>
+                    <div class="form-group">
+                         <label for="grid_color">Color</label>
+                         <select class="form-control" id="grid_color"></select>
+                    </div>
+                    <div class="form-group">
+                         <label for="grid_pattern">Pattern</label>
+                         <select class="form-control" id="grid_pattern"></select>
+                    </div>
+                    <div class="form-group">
+                         <label for="grid_location">Location</label>
+                         <select class="form-control" id="grid_location"></select>
+                    </div>
+                    <div class="form-group">
+                         <label for="">Vertical</label>
+                         <input class="form-control" type="number">
+                    </div>
+                    <div class="form-group">
+                         <label for="">Horizontal</label>
+                         <input class="form-control" type="number">
+                    </div>
+                    <h3>Obscured</h3>
+                    <div class="form-group">
+                         <label for="obscured_location">Location</label>
+                         <select class="form-control" id="obscured_location"></select>
+                    </div>
+                    <h3>Tempered</h3>
+                    <div class="form-group">
+                         <label for="tempured_location">Location</label>
+                         <select class="form-control" id="tempered_location"></select>
+                    </div>
+                    <h3>Unit Operation / Venting</h3>
+                    <span class="help-block">PD, Casement, etc.</span>
+                    <div class="form-group">
+                         <select class="form-control" id="handling_1"></select>
+                         <select class="form-control" id="handling_2"></select>
+                         <select class="form-control" id="handling_3"></select>
+                         <select class="form-control" id="handling_4"></select>
+                         <select class="form-control" id="handling_5"></select>
+                    </div>
+                    <h3>Full Screen</h3>
+                    <div class="form-group">
+                         <span class="help-block">Yes/No</span>
+                         <select class="form-control" id="full_screen_response"></select>
+                    </div>
+               </form>
+          </div>
+          <!-- Right side column (Unused) -->
+          <div class="col-xs-2 col-sm-2 col-md-3 col-lg-3"></div>
+     </div>
+</div>
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js'></script>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-beta/js/bootstrap.min.js'></script>
+
+    <script  src="js/form.js"></script>
+
+</body>
+</html>
