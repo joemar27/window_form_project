@@ -13,114 +13,146 @@
 
 <body>
   <div>
-     <h1>Window Work Order</h1>
+     <h1 class="text-center">Window Work Order</h1>
      <div class="row">
           <!-- Left side column (Unused) -->
-          <div class="col-xs-2 col-sm-2 col-md-3 col-lg-3"></div>
-          <div class="col-xs-8 col-sm-8 col-md-6 col-lg-6">
-               <form>
-                    <div class="form-group">
-                         <label for="customer_name">Customer Name</label>
-                         <input class="form-control" type="text" id="customer_name">
-                         <label for="completed_by">Completed By</label>
-                         <input class="form-control" type="text" id="completed_by">
-                         <label for="job_number">Job Number</label>
-                         <input class="form-control" type="number" id="job_number">
+          <div class="col-sm-2 col-md-3 col-lg-3"></div>
+          <div class="col-xs-12 col-sm-8 col-md-6 col-lg-6">
+               <form action="window_form_handler.php" method="POST" id="window_form">
+                  <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+                      <div class="panel panel-default">
+                        <div class="panel-heading" role="tab" id="headingOne">
+                            <h4 class="panel-title">
+                                <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                  Line Item #1
+                                </a>
+                            </h4>
+                        </div>
+                        <div id="collapseOne" class="panel-collapse collapse show" role="tabpanel" aria-labelledby="headingOne">
+                            <div class="panel-body">
+                                <div class="form-group">
+                                    <label for="customer_name">Customer Name</label>
+                                    <input class="form-control" type="text" name="customer_name" id="customer_name">
+                                    <label for="completed_by">Completed By</label>
+                                    <input class="form-control" type="text" name="completed_by" id="completed_by">
+                                    <label for="job_number">Job Number</label>
+                                    <input class="form-control" type="number" name="job_number" id="job_number">
+                                </div>
+                                <h3>Base Location</h3>
+                                <div class="form-group">
+                                    <label for="location_code">Location</label>
+                                    <select class="form-control" id="location_code" name="location_code">
+                                    </select>
+                                </div>
+                                <h3>Opening Size</h3>
+                                <div class="form-group">
+                                    <label for="opening_size_width">Width</label>
+                                    <input class="form-control" type="number" name="opening_size_width" id="opening_size_width">
+                                </div>
+                                <div class="form-group">
+                                    <label for="opening_size_height">Height</label>
+                                    <input class="form-control" type="number" name="opening_size_height" id="opening_size_height">
+                                </div>
+                                <div class="form-group">
+                                    <label for="opening_size_total_ui">Total UI</label>
+                                    <input class="form-control" type="number" name="opening_size_total_ui" id="opening_size_total_ui">
+                                </div>
+                                <div class="form-group">
+                                    <label for="opening_size_leg_height">Leg Height</label>
+                                    <input class="form-control" type="number" name="opening_size_leg_height" id="opening_size_leg_height">
+                                </div>
+                                <h3>Window Type</h3>
+                                <div class="form-group">
+                                    <label for="series_code">Series Code</label>
+                                    <select class="form-control" name="series_code" id="series_code"></select>
+                                </div>
+                                <div class="form-group">
+                                    <label for="style_code">Style Code</label>
+                                    <select class="form-control" name="style_code" id="style_code"></select>
+                                </div>
+                                <h3>Color</h3>
+                                <div class="form-group">
+                                    <label for="exterior_color">Exterior</label>
+                                    <select class="form-control" name="exterior_color" id="exterior_color"></select>
+                                </div>
+                                <div class="form-group">
+                                    <label for="interior_color">Interior</label>
+                                    <select class="form-control" name="interior_color" id="interior_color"></select>
+                                </div>
+                                <h3>Grid&#40;s&#41;</h3>
+                                <div class="form-group">
+                                    <label for="grid_type">Type</label>
+                                    <select class="form-control" name="grid_type" id="grid_type"></select>
+                                </div>
+                                <div class="form-group">
+                                    <label for="grid_color">Color</label>
+                                    <select class="form-control" name="grid_color" id="grid_color"></select>
+                                </div>
+                                <div class="form-group">
+                                    <label for="grid_pattern">Pattern</label>
+                                    <select class="form-control" name="grid_pattern" id="grid_pattern"></select>
+                                </div>
+                                <div class="form-group">
+                                    <label for="grid_location">Location</label>
+                                    <select class="form-control" name="grid_location" id="grid_location"></select>
+                                </div>
+                                <div class="form-group">
+                                    <label for="vertical_num">Vertical</label>
+                                    <input class="form-control" name="vertical_num" id="vertical_num" type="number">
+                                </div>
+                                <div class="form-group">
+                                    <label for="horizontal_num">Horizontal</label>
+                                    <input class="form-control" name="horizontal_num" id="horizontal_num" type="number">
+                                </div>
+                                <h3>Obscured</h3>
+                                <div class="form-group">
+                                    <label for="obscured_location">Location</label>
+                                    <select class="form-control" name="obscured_location" id="obscured_location"></select>
+                                </div>
+                                <h3>Tempered</h3>
+                                <div class="form-group">
+                                    <label for="tempured_location">Location</label>
+                                    <select class="form-control" name="tempered_location" id="tempered_location"></select>
+                                </div>
+                                <h3>Unit Operation / Venting</h3>
+                                <span class="help-block">PD, Casement, etc.</span>
+                                <div class="form-group">
+                                    <select class="form-control" name="handling_1" id="handling_1"></select>
+                                    <select class="form-control" name="handling_2" id="handling_2"></select>
+                                    <select class="form-control" name="handling_3" id="handling_3"></select>
+                                    <select class="form-control" name="handling_4" id="handling_4"></select>
+                                    <select class="form-control" name="handling_5" id="handling_5"></select>
+                                </div>
+                                <h3>Full Screen</h3>
+                                <div class="form-group">
+                                    <span class="help-block">Yes/No</span>
+                                    <select class="form-control" name="full_screen_response" id="full_screen_response"></select>
+                                </div>
+                            </div>
+                        </div>
+                      </div>
+                      <div class="panel panel-default">
+                        <div class="panel-heading" role="tab" id="headingTwo">
+                            <h4 class="panel-title">
+                                <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                                  Line Item #2
+                                </a>
+                            </h4>
+                        </div>
+                        <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
+                            <div class="panel-body">
+                              More Stuff.
+                            </div>
+                        </div>
+                      </div>
                     </div>
-                    <h3>Base Location</h3>
-                    <div class="form-group">
-                         <label for="location_code">Location</label>
-                         <select class="form-control" id="location_code">
-                         </select>
-                    </div>
-                    <h3>Opening Size</h3>
-                    <div class="form-group">
-                         <label for="">Width</label>
-                         <input class="form-control" type="number">
-                    </div>
-                    <div class="form-group">
-                         <label for="">Height</label>
-                         <input class="form-control" type="number">
-                    </div>
-                    <div class="form-group">
-                         <label for="">Total UI</label>
-                         <input class="form-control" type="number">
-                    </div>
-                    <div class="form-group">
-                         <label for="">Leg Height</label>
-                         <input class="form-control" type="number">
-                    </div>
-                    <h3>Window Type</h3>
-                    <div class="form-group">
-                         <label for="series_code">Series Code</label>
-                         <select class="form-control" id="series_code"></select>
-                    </div>
-                    <div class="form-group">
-                         <label for="style_code">Style Code</label>
-                         <select class="form-control" id="style_code"></select>
-                    </div>
-                    <h3>Color</h3>
-                    <div class="form-group">
-                         <label for="exterior_color">Exterior</label>
-                         <select class="form-control" id="exterior_color"></select>
-                    </div>
-                    <div class="form-group">
-                         <label for="interior_color">Interior</label>
-                         <select class="form-control" id="interior_color"></select>
-                    </div>
-                    <h3>Grid&#40;s&#41;</h3>
-                    <div class="form-group">
-                         <label for="grid_type">Type</label>
-                         <select class="form-control" id="grid_type"></select>
-                    </div>
-                    <div class="form-group">
-                         <label for="grid_color">Color</label>
-                         <select class="form-control" id="grid_color"></select>
-                    </div>
-                    <div class="form-group">
-                         <label for="grid_pattern">Pattern</label>
-                         <select class="form-control" id="grid_pattern"></select>
-                    </div>
-                    <div class="form-group">
-                         <label for="grid_location">Location</label>
-                         <select class="form-control" id="grid_location"></select>
-                    </div>
-                    <div class="form-group">
-                         <label for="">Vertical</label>
-                         <input class="form-control" type="number">
-                    </div>
-                    <div class="form-group">
-                         <label for="">Horizontal</label>
-                         <input class="form-control" type="number">
-                    </div>
-                    <h3>Obscured</h3>
-                    <div class="form-group">
-                         <label for="obscured_location">Location</label>
-                         <select class="form-control" id="obscured_location"></select>
-                    </div>
-                    <h3>Tempered</h3>
-                    <div class="form-group">
-                         <label for="tempured_location">Location</label>
-                         <select class="form-control" id="tempered_location"></select>
-                    </div>
-                    <h3>Unit Operation / Venting</h3>
-                    <span class="help-block">PD, Casement, etc.</span>
-                    <div class="form-group">
-                         <select class="form-control" id="handling_1"></select>
-                         <select class="form-control" id="handling_2"></select>
-                         <select class="form-control" id="handling_3"></select>
-                         <select class="form-control" id="handling_4"></select>
-                         <select class="form-control" id="handling_5"></select>
-                    </div>
-                    <h3>Full Screen</h3>
-                    <div class="form-group">
-                         <span class="help-block">Yes/No</span>
-                         <select class="form-control" id="full_screen_response"></select>
-                    </div>
+                    <button type="button" style="width: 100%;" class="btn btn-info">Add Line Item <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+                    </button><br><br>
+                    <button type="submit" style="width: 100%;" class="btn btn-primary">Submit</button>
                </form>
           </div>
           <!-- Right side column (Unused) -->
-          <div class="col-xs-2 col-sm-2 col-md-3 col-lg-3"></div>
+          <div class="col-sm-2 col-md-3 col-lg-3"></div>
      </div>
 </div>
   <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js'></script>
