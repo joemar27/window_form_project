@@ -1,7 +1,6 @@
 <?php
-$location_code= $_POST['location_code'];
-
-foreach($location_code as $location){
-    echo "location: " . $location . "<br>";
+if(isset($_POST['formdata'])){
+    $data = htmlspecialchars($_POST['formdata']);
+    echo $data;
 }
 ?>

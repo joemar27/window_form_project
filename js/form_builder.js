@@ -1,6 +1,7 @@
-var LineItemCounter;
+var LineItemCounter, WindowFormData;
 
 LineItemCounter = 0;
+WindowFormData = {};
 
 function AppendAccordianPanel(){
     //  Check for previous line item and close it if it exists.
@@ -31,108 +32,14 @@ function AppendAccordianPanel(){
     return $('#accordion').append(panel);
 }
 
-
-
 function AppendFormSection(){
     var formstring;
     formstring = 
-        '<h3>Base Location</h3>'+
-        '<div class="form-group">'+
-            '<label>Location</label>'+
-            '<select class="form-control location_code" name="location_code[]">'+
-            '</select>'+
-        '</div>'+
-        '<h3>Opening Size</h3>'+
-        '<div class="form-group">'+
-            '<label>Width</label>'+
-            '<input class="form-control" type="number" name="opening_size_width[]">'+
-        '</div>'+
-        '<div class="form-group">'+
-            '<label>Height</label>'+
-            '<input class="form-control" type="number" name="opening_size_height[]">'+
-        '</div>'+
-        '<div class="form-group">'+
-            '<label>Total UI</label>'+
-            '<input class="form-control" type="number" name="opening_size_total_ui[]">'+
-        '</div>'+
-        '<div class="form-group">'+
-            '<label>Leg Height</label>'+
-            '<input class="form-control" type="number" name="opening_size_leg_height[]">'+
-        '</div>'+
-        '<h3>Window Type</h3>'+
-        '<div class="form-group">'+
-            '<label>Series Code</label>'+
-            '<select class="form-control series_code" name="series_code[]"></select>'+
-        '</div>'+
-        '<div class="form-group">'+
-            '<label>Style Code</label>'+
-            '<select class="form-control style_code" name="style_code[]"></select>'+
-        '</div>'+
-        '<h3>Color</h3>'+
-        '<div class="form-group">'+
-            '<label>Exterior</label>'+
-            '<select class="form-control exterior_color" name="exterior_color[]"></select>'+
-        '</div>'+
-        '<div class="form-group">'+
-            '<label>Interior</label>'+
-            '<select class="form-control interior_color" name="interior_color[]"></select>'+
-        '</div>'+
-        '<h3>Grid&#40;s&#41;</h3>'+
-        '<div class="form-group">'+
-            '<label>Type</label>'+
-            '<select class="form-control grid_type" name="grid_type[]"></select>'+
-        '</div>'+
-        '<div class="form-group">'+
-            '<label>Color</label>'+
-            '<select class="form-control grid_color" name="grid_color[]"></select>'+
-        '</div>'+
-        '<div class="form-group">'+
-            '<label>Pattern</label>'+
-            '<select class="form-control grid_pattern" name="grid_pattern[]"></select>'+
-        '</div>'+
-        '<div class="form-group">'+
-            '<label>Location</label>'+
-            '<select class="form-control grid_location" name="grid_location[]"></select>'+
-        '</div>'+
-        '<div class="form-group">'+
-            '<label for="vertical_num">Vertical</label>'+
-            '<input class="form-control" name="vertical_num" id="vertical_num" type="number">'+
-        '</div>'+
-        '<div class="form-group">'+
-            '<label>Horizontal</label>'+
-            '<input class="form-control" name="horizontal_num[]" type="number">'+
-        '</div>'+
-        '<h3>Obscured</h3>'+
-        '<div class="form-group">'+
-            '<label>Location</label>'+
-            '<select class="form-control obscured_location" name="obscured_location[]"></select>'+
-        '</div>'+
-        '<h3>Tempered</h3>'+
-        '<div class="form-group">'+
-            '<label>Location</label>'+
-            '<select class="form-control tempered_location" name="tempered_location[]"></select>'+
-        '</div>'+
-        '<h3>Unit Operation / Venting</h3>'+
-        '<span class="help-block">PD, Casement, etc.</span>'+
-        '<div class="form-group">'+
-            '<select class="form-control handling_1" name="handling_1[]"></select>'+
-            '<select class="form-control handling_2" name="handling_2[]"></select>'+
-            '<select class="form-control handling_3" name="handling_3[]"></select>'+
-            '<select class="form-control handling_4" name="handling_4[]"></select>'+
-            '<select class="form-control handling_5" name="handling_5[]"></select>'+
-        '</div>'+
-        '<h3>Full Screen</h3>'+
-        '<div class="form-group">'+
-            '<span class="help-block">Yes/No</span>'+
-            '<select class="form-control full_screen_response" name="full_screen_response[]"></select>'+
-        '</div>';
+        base_location_section + opening_size_section + window_type_section + color_section + grid_section + obscured_section + tempered_section + unit_operation_section + full_screen_section;
+
         return $('#PanelBody_'+LineItemCounter).append(formstring);
 }
-$('#add_line_item_btn').click(function(){
-    AppendAccordianPanel();
-    AppendFormSection();
-    AddSelectOptions();
-});
+
 function AddSelectOptions(){
      //  Location Value Loader
      for(var key in location_code){
@@ -188,5 +95,57 @@ function AddSelectOptions(){
                $('.full_screen_response').append("<option value="+key+"-"+yes_no[key]+">"+yes_no[key]+"</option>");
           }
      }
-     
-};
+}
+
+function isEmpty(obj) {
+    for(var prop in obj) {
+        if(obj.hasOwnProperty(prop))
+            return false;
+    }
+    return true;
+}
+
+function CollectFormData(){
+    var customer_name, completed_by, job_number, line_item;
+    customer_name = $('#customer_name').val();
+    completed_by = $('#completed_by').val();
+    job_number = $('#job_number').val();
+
+    WindowFormData['customer_name'] = customer_name
+    WindowFormData['completed_by'] = completed_by
+    WindowFormData['job_number'] = job_number
+
+    for(var i=1;i <= LineItemCounter; i++){
+        line_item_name = 'LineItem_' + i;
+        var lineitem = WindowFormData[line_item_name] = {};
+        $('#PanelBody_'+i+' input,select').each(function () {
+            var name = this.name.slice(0,-2);
+            var value = this.value;
+            lineitem[name] = value;
+        });
+    }
+
+    $.ajax({
+        method: "POST",
+        url: "handlers/window_form_handler.php",
+        data: { formdata: JSON.stringify(WindowFormData) },
+        success: function(data){
+            console.log(data);
+        }
+    });
+}
+
+//  Event Listeners
+$('#add_line_item_btn').click(function(){
+    AppendAccordianPanel();
+    AppendFormSection();
+    AddSelectOptions();
+});
+
+$('#window_form').submit(function(event){
+    event.preventDefault();
+    CollectFormData();
+    // var result = isEmpty(WindowFormData);
+});
+
+/* customer_name, completed_by, job_number, location_code[], opening_size_width[], opening_size_height[], opening_size_total_ui[], opening_size_leg_height[], series_code[], style_code[], exterior_color[], interior_color[], grid_type[], grid_color[], grid_pattern[], grid_location[], vertical_num[], horizontal_num[], obscured_location[], tempered_location[], handling_1[], handling_2[], handling_3[], handling_4[], handling_5[], full_screen_response[]*/
