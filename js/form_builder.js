@@ -131,7 +131,17 @@ function CollectFormData(){
         url: "handlers/window_form_handler.php",
         data: { formdata: JSON.stringify(WindowFormData) },
         success: function(data){
-            console.log(data);
+            GetCSV();
+        }
+    });
+}
+
+function GetCSV(){
+    $.ajax({
+        url: "handlers/download_file.php",
+        type: "POST",
+        success: function(){
+            window.location = 'handlers/download_file.php';
         }
     });
 }
