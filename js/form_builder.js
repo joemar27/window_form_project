@@ -115,14 +115,15 @@ function CollectFormData(){
     WindowFormData['completed_by'] = completed_by
     WindowFormData['job_number'] = job_number
 
+    WindowFormData['LineItems'] = [];
     for(var i=1;i <= LineItemCounter; i++){
-        line_item_name = 'LineItem_' + i;
-        var lineitem = WindowFormData[line_item_name] = {};
+        var lineitem_obj = {};
         $('#PanelBody_'+i+' input,select').each(function () {
-            var name = this.name.slice(0,-2);
+            var name = this.name;
             var value = this.value;
-            lineitem[name] = value;
+            lineitem_obj[name] = value;
         });
+        WindowFormData['LineItems'].push(lineitem_obj);
     }
 
     $.ajax({
